@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Wedding</title>
+  <meta name="description" content="Join us as we celebrate our wedding day.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+
+  <!-- ============ ENVELOPE INTRO ============ -->
+  <div id="intro" class="intro" aria-modal="true" role="dialog" aria-label="Invitation">
+    <div class="envelope" id="envelope">
+      <div class="env-back"></div>
+      <div class="env-letter">
+        <p class="eyebrow">Together with their families</p>
+        <p class="script"><span data-bind="partner1"></span> <span class="amp">&amp;</span> <span data-bind="partner2"></span></p>
+        <p class="eyebrow" data-bind="dateText"></p>
+      </div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <button class="seal" id="openInvite" aria-label="Open invitation">
+        <span data-bind="initials"></span>
+      </button>
+    </div>
+    <p class="intro-hint">Tap the seal to open</p>
+  </div>
+
+  <canvas id="petals" aria-hidden="true"></canvas>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav-logo" data-bind="initials"></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#entourage">Entourage</a>
+      <a href="#attire">Attire</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp" class="nav-cta">RSVP</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="home" class="hero">
+      <svg class="branch branch-left" viewBox="0 0 220 420" aria-hidden="true">
+        <path class="stem" d="M200 410 C 150 330, 60 300, 70 200 C 78 120, 40 70, 20 10"/>
+        <path class="leaf" style="--i:1" d="M160 352 q -40 -6 -58 -36 q 36 4 58 36z"/>
+        <path class="leaf" style="--i:2" d="M120 320 q 10 -40 44 -52 q -6 36 -44 52z"/>
+        <path class="leaf" style="--i:3" d="M80 262 q -40 -10 -52 -44 q 36 8 52 44z"/>
+        <path class="leaf" style="--i:4" d="M72 214 q 14 -38 50 -46 q -10 36 -50 46z"/>
+        <path class="leaf" style="--i:5" d="M70 160 q -38 -16 -44 -52 q 32 14 44 52z"/>
+        <path class="leaf" style="--i:6" d="M56 110 q 18 -34 52 -38 q -14 32 -52 38z"/>
+        <path class="leaf" style="--i:7" d="M38 62 q -30 -20 -30 -50 q 26 18 30 50z"/>
+      </svg>
+      <svg class="branch branch-right" viewBox="0 0 220 420" aria-hidden="true">
+        <path class="stem" d="M200 410 C 150 330, 60 300, 70 200 C 78 120, 40 70, 20 10"/>
+        <path class="leaf" style="--i:1" d="M160 352 q -40 -6 -58 -36 q 36 4 58 36z"/>
+        <path class="leaf" style="--i:2" d="M120 320 q 10 -40 44 -52 q -6 36 -44 52z"/>
+        <path class="leaf" style="--i:3" d="M80 262 q -40 -10 -52 -44 q 36 8 52 44z"/>
+        <path class="leaf" style="--i:4" d="M72 214 q 14 -38 50 -46 q -10 36 -50 46z"/>
+        <path class="leaf" style="--i:5" d="M70 160 q -38 -16 -44 -52 q 32 14 44 52z"/>
+        <path class="leaf" style="--i:6" d="M56 110 q 18 -34 52 -38 q -14 32 -52 38z"/>
+        <path class="leaf" style="--i:7" d="M38 62 q -30 -20 -30 -50 q 26 18 30 50z"/>
+      </svg>
+
+      <div class="hero-inner">
+        <p class="eyebrow hero-in" style="--d:.2s">We're getting married</p>
+        <h1 class="hero-names">
+          <span class="hero-in" style="--d:.5s" data-bind="partner1"></span>
+          <span class="amp hero-in" style="--d:.8s">&amp;</span>
+          <span class="hero-in" style="--d:1.1s" data-bind="partner2"></span>
+        </h1>
+        <div class="hero-date hero-in" style="--d:1.4s">
+          <span data-bind="dayText"></span>
+          <span class="dot"></span>
+          <span data-bind="dateText"></span>
+          <span class="dot"></span>
+          <span data-bind="city"></span>
+        </div>
+
+        <div class="countdown hero-in" style="--d:1.7s" id="countdown">
+          <div><span id="cd-days">00</span><small>Days</small></div>
+          <div><span id="cd-hours">00</span><small>Hours</small></div>
+          <div><span id="cd-mins">00</span><small>Minutes</small></div>
+          <div><span id="cd-secs">00</span><small>Seconds</small></div>
+        </div>
+        <a href="#rsvp" class="btn hero-in" style="--d:2s">Kindly RSVP</a>
+      </div>
+      <a href="#story" class="scroll-cue" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ QUOTE ============ -->
+    <section class="quote">
+      <blockquote class="reveal">
+        “So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate.”
+        <cite>Matthew 19:6</cite>
+      </blockquote>
+    </section>
+
+    <!-- ============ STORY ============ -->
+    <section id="story" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">How it all began</p>
+        <h2>Our Story</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+
+      <ol class="timeline">
+        <li class="reveal">
+          <div class="tl-photo" style="--img:url('images/story-1.jpg')"><span>2018</span></div>
+          <div class="tl-body">
+            <p class="tl-date">Spring 2018</p>
+            <h3>The First Hello</h3>
+            <p>We met at a friend's birthday dinner and talked until the restaurant closed. Replace this with how your story began.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="tl-photo" style="--img:url('images/story-2.jpg')"><span>2019</span></div>
+          <div class="tl-body">
+            <p class="tl-date">Summer 2019</p>
+            <h3>Our First Adventure</h3>
+            <p>A spontaneous road trip turned into countless adventures together. Share a memory that shaped your relationship.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="tl-photo" style="--img:url('images/story-3.jpg')"><span>2025</span></div>
+          <div class="tl-body">
+            <p class="tl-date">December 2025</p>
+            <h3>The Question</h3>
+            <p>Under a sky full of stars, one knee touched the ground and the answer was a tearful “Yes!” Tell the proposal story here.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="tl-photo" style="--img:url('images/story-4.jpg')"><span>2027</span></div>
+          <div class="tl-body">
+            <p class="tl-date" data-bind="dateText"></p>
+            <h3>Forever Begins</h3>
+            <p>And now we can't wait to celebrate the start of our forever with the people we love most — you.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ DETAILS ============ -->
+    <section id="details" class="section section-tint">
+      <div class="section-head reveal">
+        <p class="eyebrow">Where &amp; when</p>
+        <h2>The Celebration</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal" style="--d:.1s">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 4v10M19 9h10M10 44V24l14-10 14 10v20M10 44h28M20 44V33a4 4 0 0 1 8 0v11"/></svg>
+          </div>
+          <p class="eyebrow">The Ceremony</p>
+          <h3>Sacred Heart Parish</h3>
+          <p class="card-time">3:00 in the afternoon</p>
+          <p>123 Chapel Road, Tagaytay City<br>Cavite, Philippines</p>
+          <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tagaytay+City">View Map</a>
+        </article>
+
+        <article class="card reveal" style="--d:.25s">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M16 6h16l-2 14a6 6 0 0 1-12 0zM24 26v14M17 42h14M9 14l4 2M39 14l-4 2"/></svg>
+          </div>
+          <p class="eyebrow">The Reception</p>
+          <h3>The Garden Estate</h3>
+          <p class="card-time">6:00 in the evening</p>
+          <p>456 Ridge View, Tagaytay City<br>Cavite, Philippines</p>
+          <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tagaytay+City">View Map</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SCHEDULE ============ -->
+    <section id="schedule" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">Order of the day</p>
+        <h2>Schedule</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+      <ul class="schedule">
+        <li class="reveal"><time>2:30 PM</time><span class="sch-dot"></span><div><h4>Guest Arrival</h4><p>Please be seated before the ceremony begins</p></div></li>
+        <li class="reveal"><time>3:00 PM</time><span class="sch-dot"></span><div><h4>Wedding Ceremony</h4><p>Sacred Heart Parish</p></div></li>
+        <li class="reveal"><time>4:30 PM</time><span class="sch-dot"></span><div><h4>Photos</h4><p>Family &amp; entourage portraits</p></div></li>
+        <li class="reveal"><time>5:30 PM</time><span class="sch-dot"></span><div><h4>Cocktail Hour</h4><p>Drinks &amp; canapés in the garden</p></div></li>
+        <li class="reveal"><time>6:30 PM</time><span class="sch-dot"></span><div><h4>Dinner Reception</h4><p>Toasts, first dance &amp; dinner</p></div></li>
+        <li class="reveal"><time>9:00 PM</time><span class="sch-dot"></span><div><h4>Dancing</h4><p>Let's celebrate into the night</p></div></li>
+      </ul>
+    </section>
+
+    <!-- ============ ENTOURAGE ============ -->
+    <section id="entourage" class="section section-tint">
+      <div class="section-head reveal">
+        <p class="eyebrow">The people who shaped us</p>
+        <h2>Entourage</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+
+      <div class="ent-grid two reveal">
+        <div><h4>Parents of the Groom</h4><p>Mr. Juan Dela Cruz</p><p>Mrs. Maria Dela Cruz</p></div>
+        <div><h4>Parents of the Bride</h4><p>Mr. Jose Santos</p><p>Mrs. Ana Santos</p></div>
+      </div>
+
+      <div class="ent-block reveal">
+        <h4>Principal Sponsors</h4>
+        <div class="ent-cols">
+          <div><p>Mr. Ramon Reyes</p><p>Mr. Carlos Garcia</p><p>Mr. Antonio Lim</p><p>Mr. Miguel Torres</p></div>
+          <div><p>Mrs. Elena Reyes</p><p>Mrs. Teresa Garcia</p><p>Mrs. Linda Lim</p><p>Mrs. Rosa Torres</p></div>
+        </div>
+      </div>
+
+      <div class="ent-grid two reveal">
+        <div><h4>Best Man</h4><p>Paolo Mendoza</p></div>
+        <div><h4>Maid of Honor</h4><p>Bianca Cruz</p></div>
+      </div>
+
+      <div class="ent-grid two reveal">
+        <div><h4>Groomsmen</h4><p>Mark Villanueva</p><p>Rico Bautista</p><p>Leo Navarro</p></div>
+        <div><h4>Bridesmaids</h4><p>Katrina Ramos</p><p>Joanna Castillo</p><p>Patricia Flores</p></div>
+      </div>
+
+      <div class="ent-grid three reveal">
+        <div><h4>Candle</h4><p>Neil &amp; Grace Aquino</p></div>
+        <div><h4>Veil</h4><p>Ben &amp; Carla Ocampo</p></div>
+        <div><h4>Cord</h4><p>Dan &amp; Mae Pascual</p></div>
+      </div>
+
+      <div class="ent-grid three reveal">
+        <div><h4>Ring Bearer</h4><p>Lucas Santos</p></div>
+        <div><h4>Coin Bearer</h4><p>Ethan Dela Cruz</p></div>
+        <div><h4>Flower Girls</h4><p>Sofia Reyes</p><p>Mia Garcia</p></div>
+      </div>
+    </section>
+
+    <!-- ============ ATTIRE ============ -->
+    <section id="attire" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">What to wear</p>
+        <h2>Dress Code</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+      <p class="lead reveal">Formal / Garden Semi-Formal. We'd love to see you in our wedding palette.</p>
+      <div class="swatches">
+        <div class="swatch reveal" style="--c:#E9DCC9;--d:0s"><span></span><small>Champagne</small></div>
+        <div class="swatch reveal" style="--c:#C9D3BC;--d:.1s"><span></span><small>Sage Mist</small></div>
+        <div class="swatch reveal" style="--c:#9CAF88;--d:.2s"><span></span><small>Sage</small></div>
+        <div class="swatch reveal" style="--c:#D8B4A6;--d:.3s"><span></span><small>Dusty Rose</small></div>
+        <div class="swatch reveal" style="--c:#B89B5E;--d:.4s"><span></span><small>Antique Gold</small></div>
+      </div>
+      <div class="attire-grid">
+        <div class="attire reveal">
+          <h4>Gentlemen</h4>
+          <p>Barong Tagalog or suit in neutral tones. Ties optional.</p>
+        </div>
+        <div class="attire reveal">
+          <h4>Ladies</h4>
+          <p>Long dress or formal cocktail attire in palette colors. Kindly avoid white.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section id="gallery" class="section section-tint">
+      <div class="section-head reveal">
+        <p class="eyebrow">Moments together</p>
+        <h2>Gallery</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+      <div class="gallery">
+        <figure class="g-item tall reveal"><img src="images/gallery-1.jpg" alt="Prenup photo 1" loading="lazy"></figure>
+        <figure class="g-item reveal"><img src="images/gallery-2.jpg" alt="Prenup photo 2" loading="lazy"></figure>
+        <figure class="g-item reveal"><img src="images/gallery-3.jpg" alt="Prenup photo 3" loading="lazy"></figure>
+        <figure class="g-item wide reveal"><img src="images/gallery-4.jpg" alt="Prenup photo 4" loading="lazy"></figure>
+        <figure class="g-item reveal"><img src="images/gallery-5.jpg" alt="Prenup photo 5" loading="lazy"></figure>
+        <figure class="g-item tall reveal"><img src="images/gallery-6.jpg" alt="Prenup photo 6" loading="lazy"></figure>
+        <figure class="g-item reveal"><img src="images/gallery-7.jpg" alt="Prenup photo 7" loading="lazy"></figure>
+        <figure class="g-item reveal"><img src="images/gallery-8.jpg" alt="Prenup photo 8" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <!-- ============ GIFTS ============ -->
+    <section id="gifts" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow">A note on gifts</p>
+        <h2>Gift Guide</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+      <p class="lead reveal">Your presence at our wedding is the greatest gift of all. Should you wish to honor us with a gift, a contribution toward our new home together would be warmly appreciated.</p>
+      <div class="cards gift-cards">
+        <div class="card reveal"><p class="eyebrow">GCash</p><h3>0917 000 0000</h3><p>Name Surname</p></div>
+        <div class="card reveal"><p class="eyebrow">Bank Transfer</p><h3>BDO · 0000 0000 0000</h3><p>Name Surname</p></div>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+    <section id="rsvp" class="section rsvp">
+      <div class="rsvp-card reveal">
+        <div class="section-head">
+          <p class="eyebrow">Will you join us?</p>
+          <h2>RSVP</h2>
+          <p class="muted">Kindly respond on or before <strong data-bind="rsvpDeadline"></strong></p>
+        </div>
+        <form id="rsvpForm" novalidate>
+          <label>Full name<input name="name" required autocomplete="name"></label>
+          <label>Email or phone<input name="contact" required></label>
+          <fieldset class="choice">
+            <legend>Will you attend?</legend>
+            <label><input type="radio" name="attending" value="Joyfully accepts" checked> <span>Joyfully accept</span></label>
+            <label><input type="radio" name="attending" value="Regretfully declines"> <span>Regretfully decline</span></label>
+          </fieldset>
+          <label>Number of guests (including you)
+            <select name="guests"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label>Message for the couple<textarea name="message" rows="3"></textarea></label>
+          <button class="btn" type="submit">Send RSVP</button>
+          <p class="form-note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="section section-tint">
+      <div class="section-head reveal">
+        <p class="eyebrow">Good to know</p>
+        <h2>FAQ</h2>
+        <div class="ornament"><span></span>❦<span></span></div>
+      </div>
+      <div class="faq">
+        <details class="reveal"><summary>Can I bring a plus one?</summary><p>We have reserved seats for each guest named on your invitation. Kindly let us know through the RSVP form.</p></details>
+        <details class="reveal"><summary>Are children welcome?</summary><p>We love your little ones, but our celebration will be adults-only, except for children in the entourage.</p></details>
+        <details class="reveal"><summary>Is there parking at the venue?</summary><p>Yes, free parking is available at both the ceremony and reception venues.</p></details>
+        <details class="reveal"><summary>Can we take photos during the ceremony?</summary><p>We're having an unplugged ceremony. Please keep phones away and let our photographers capture the moment. Feel free to snap away at the reception!</p></details>
+        <details class="reveal"><summary>What time should I arrive?</summary><p>Please arrive at least 30 minutes before the ceremony starts.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="script"><span data-bind="partner1"></span> <span class="amp">&amp;</span> <span data-bind="partner2"></span></p>
+    <p class="eyebrow" data-bind="dateText"></p>
+    <p class="hashtag" data-bind="hashtag"></p>
+    <p class="muted small">Made with love · See you there</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" aria-label="Close">×</button>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <img alt="">
+    <button class="lb-next" aria-label="Next">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
