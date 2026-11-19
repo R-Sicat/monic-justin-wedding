@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Our Wedding</title>
   <meta name="description" content="Join us as we celebrate our wedding day.">
+  <meta name="theme-color" content="#BFDCF2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -12,8 +13,49 @@
 </head>
 <body class="locked">
 
+  <!-- Reusable cloud shape -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="cloudShade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset=".65" stop-color="#FBFCFF"/>
+        <stop offset="1" stop-color="#DCE7F4"/>
+      </linearGradient>
+      <symbol id="cloud" viewBox="0 0 300 130">
+        <g fill="url(#cloudShade)">
+          <circle cx="72" cy="84" r="40"/>
+          <circle cx="122" cy="58" r="52"/>
+          <circle cx="186" cy="62" r="46"/>
+          <circle cx="236" cy="88" r="34"/>
+          <rect x="36" y="84" width="236" height="44" rx="22"/>
+        </g>
+      </symbol>
+      <symbol id="cloud2" viewBox="0 0 300 130">
+        <g fill="url(#cloudShade)">
+          <circle cx="60" cy="92" r="30"/>
+          <circle cx="104" cy="70" r="42"/>
+          <circle cx="160" cy="48" r="46"/>
+          <circle cx="214" cy="72" r="40"/>
+          <circle cx="252" cy="96" r="26"/>
+          <rect x="34" y="92" width="244" height="36" rx="18"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- ============ ENVELOPE INTRO ============ -->
   <div id="intro" class="intro" aria-modal="true" role="dialog" aria-label="Invitation">
+    <div class="intro-sky"></div>
+    <div class="intro-clouds left">
+      <svg class="cloud " style="--x:-10%;--y:8%;--w:520px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+      <svg class="cloud " style="--x:-18%;--y:42%;--w:640px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      <svg class="cloud " style="--x:-6%;--y:74%;--w:560px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+    </div>
+    <div class="intro-clouds right">
+      <svg class="cloud " style="--x:62%;--y:2%;--w:560px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      <svg class="cloud " style="--x:58%;--y:36%;--w:620px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+      <svg class="cloud " style="--x:64%;--y:70%;--w:600px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+    </div>
     <div class="envelope" id="envelope">
       <div class="env-back"></div>
       <div class="env-letter">
@@ -50,26 +92,23 @@
   <main>
     <!-- ============ HERO ============ -->
     <section id="home" class="hero">
-      <svg class="branch branch-left" viewBox="0 0 220 420" aria-hidden="true">
-        <path class="stem" d="M200 410 C 150 330, 60 300, 70 200 C 78 120, 40 70, 20 10"/>
-        <path class="leaf" style="--i:1" d="M160 352 q -40 -6 -58 -36 q 36 4 58 36z"/>
-        <path class="leaf" style="--i:2" d="M120 320 q 10 -40 44 -52 q -6 36 -44 52z"/>
-        <path class="leaf" style="--i:3" d="M80 262 q -40 -10 -52 -44 q 36 8 52 44z"/>
-        <path class="leaf" style="--i:4" d="M72 214 q 14 -38 50 -46 q -10 36 -50 46z"/>
-        <path class="leaf" style="--i:5" d="M70 160 q -38 -16 -44 -52 q 32 14 44 52z"/>
-        <path class="leaf" style="--i:6" d="M56 110 q 18 -34 52 -38 q -14 32 -52 38z"/>
-        <path class="leaf" style="--i:7" d="M38 62 q -30 -20 -30 -50 q 26 18 30 50z"/>
-      </svg>
-      <svg class="branch branch-right" viewBox="0 0 220 420" aria-hidden="true">
-        <path class="stem" d="M200 410 C 150 330, 60 300, 70 200 C 78 120, 40 70, 20 10"/>
-        <path class="leaf" style="--i:1" d="M160 352 q -40 -6 -58 -36 q 36 4 58 36z"/>
-        <path class="leaf" style="--i:2" d="M120 320 q 10 -40 44 -52 q -6 36 -44 52z"/>
-        <path class="leaf" style="--i:3" d="M80 262 q -40 -10 -52 -44 q 36 8 52 44z"/>
-        <path class="leaf" style="--i:4" d="M72 214 q 14 -38 50 -46 q -10 36 -50 46z"/>
-        <path class="leaf" style="--i:5" d="M70 160 q -38 -16 -44 -52 q 32 14 44 52z"/>
-        <path class="leaf" style="--i:6" d="M56 110 q 18 -34 52 -38 q -14 32 -52 38z"/>
-        <path class="leaf" style="--i:7" d="M38 62 q -30 -20 -30 -50 q 26 18 30 50z"/>
-      </svg>
+      <div class="sky-glow" aria-hidden="true"></div>
+      <div class="sky-rays" aria-hidden="true"></div>
+      <div class="clouds-layer far" aria-hidden="true">
+        <svg class="cloud drift" style="--x:4%;--y:14%;--w:220px;--dur:46s;--o:.7" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <svg class="cloud drift" style="--x:70%;--y:9%;--w:260px;--dur:58s;--o:.75" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud drift" style="--x:38%;--y:4%;--w:170px;--dur:40s;--o:.6" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      </div>
+      <div class="clouds-layer mid" aria-hidden="true">
+        <svg class="cloud drift" style="--x:-6%;--y:40%;--w:340px;--dur:52s;--o:.9" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud drift" style="--x:76%;--y:34%;--w:360px;--dur:64s;--o:.9" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      </div>
+      <div class="clouds-layer floor" aria-hidden="true">
+        <svg class="cloud bob" style="--x:-12%;--y:72%;--w:560px;--dur:9s" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud bob" style="--x:22%;--y:80%;--w:620px;--dur:11s" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <svg class="cloud bob" style="--x:58%;--y:76%;--w:580px;--dur:10s" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud bob" style="--x:84%;--y:70%;--w:480px;--dur:12s" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      </div>
 
       <div class="hero-inner">
         <p class="eyebrow hero-in" style="--d:.2s">We're getting married</p>
@@ -99,9 +138,11 @@
 
     <!-- ============ QUOTE ============ -->
     <section class="quote">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="stars s2" aria-hidden="true"></div>
       <blockquote class="reveal">
-        “So they are no longer two, but one flesh. Therefore what God has joined together, let no one separate.”
-        <cite>Matthew 19:6</cite>
+        “Every good and perfect gift is from above, coming down from the Father of the heavenly lights.”
+        <cite>James 1:17</cite>
       </blockquote>
     </section>
 
@@ -110,7 +151,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">How it all began</p>
         <h2>Our Story</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
 
       <ol class="timeline">
@@ -154,7 +195,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">Where &amp; when</p>
         <h2>The Celebration</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
 
       <div class="cards">
@@ -187,7 +228,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">Order of the day</p>
         <h2>Schedule</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
       <ul class="schedule">
         <li class="reveal"><time>2:30 PM</time><span class="sch-dot"></span><div><h4>Guest Arrival</h4><p>Please be seated before the ceremony begins</p></div></li>
@@ -204,7 +245,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">The people who shaped us</p>
         <h2>Entourage</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
 
       <div class="ent-grid two reveal">
@@ -248,24 +289,24 @@
       <div class="section-head reveal">
         <p class="eyebrow">What to wear</p>
         <h2>Dress Code</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
-      <p class="lead reveal">Formal / Garden Semi-Formal. We'd love to see you in our wedding palette.</p>
+      <p class="lead reveal">Formal. Dress like the heavens: we'd love to see you in white, icy blue and navy blue.</p>
       <div class="swatches">
-        <div class="swatch reveal" style="--c:#E9DCC9;--d:0s"><span></span><small>Champagne</small></div>
-        <div class="swatch reveal" style="--c:#C9D3BC;--d:.1s"><span></span><small>Sage Mist</small></div>
-        <div class="swatch reveal" style="--c:#9CAF88;--d:.2s"><span></span><small>Sage</small></div>
-        <div class="swatch reveal" style="--c:#D8B4A6;--d:.3s"><span></span><small>Dusty Rose</small></div>
-        <div class="swatch reveal" style="--c:#B89B5E;--d:.4s"><span></span><small>Antique Gold</small></div>
+        <div class="swatch reveal" style="--c:#FFFFFF;--d:0s"><span></span><small>White</small></div>
+        <div class="swatch reveal" style="--c:#E3F0FA;--d:.1s"><span></span><small>Frost</small></div>
+        <div class="swatch reveal" style="--c:#BFDCF2;--d:.2s"><span></span><small>Icy Blue</small></div>
+        <div class="swatch reveal" style="--c:#7FA8D1;--d:.3s"><span></span><small>Winter Blue</small></div>
+        <div class="swatch reveal" style="--c:#1F3359;--d:.4s"><span></span><small>Navy Blue</small></div>
       </div>
       <div class="attire-grid">
         <div class="attire reveal">
           <h4>Gentlemen</h4>
-          <p>Barong Tagalog or suit in neutral tones. Ties optional.</p>
+          <p>Barong Tagalog, or a navy or light-blue suit. Ties optional.</p>
         </div>
         <div class="attire reveal">
           <h4>Ladies</h4>
-          <p>Long dress or formal cocktail attire in palette colors. Kindly avoid white.</p>
+          <p>Long gown or formal cocktail dress in icy blue or navy. Kindly reserve an all-white gown for the bride.</p>
         </div>
       </div>
     </section>
@@ -275,7 +316,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">Moments together</p>
         <h2>Gallery</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
       <div class="gallery">
         <figure class="g-item tall reveal"><img src="images/gallery-1.jpg" alt="Prenup photo 1" loading="lazy"></figure>
@@ -294,7 +335,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">A note on gifts</p>
         <h2>Gift Guide</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
       <p class="lead reveal">Your presence at our wedding is the greatest gift of all. Should you wish to honor us with a gift, a contribution toward our new home together would be warmly appreciated.</p>
       <div class="cards gift-cards">
@@ -305,6 +346,12 @@
 
     <!-- ============ RSVP ============ -->
     <section id="rsvp" class="section rsvp">
+      <div class="clouds-layer rsvp-clouds" aria-hidden="true">
+        <svg class="cloud drift" style="--x:-8%;--y:8%;--w:360px;--dur:50s;--o:.9" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud drift" style="--x:74%;--y:18%;--w:320px;--dur:60s;--o:.85" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <svg class="cloud drift" style="--x:-4%;--y:70%;--w:300px;--dur:56s;--o:.8" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+        <svg class="cloud drift" style="--x:78%;--y:72%;--w:380px;--dur:48s;--o:.9" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      </div>
       <div class="rsvp-card reveal">
         <div class="section-head">
           <p class="eyebrow">Will you join us?</p>
@@ -334,7 +381,7 @@
       <div class="section-head reveal">
         <p class="eyebrow">Good to know</p>
         <h2>FAQ</h2>
-        <div class="ornament"><span></span>❦<span></span></div>
+        <div class="ornament"><span></span>✦<span></span></div>
       </div>
       <div class="faq">
         <details class="reveal"><summary>Can I bring a plus one?</summary><p>We have reserved seats for each guest named on your invitation. Kindly let us know through the RSVP form.</p></details>
@@ -347,10 +394,11 @@
   </main>
 
   <footer class="footer">
+    <div class="sky-rays small" aria-hidden="true"></div>
     <p class="script"><span data-bind="partner1"></span> <span class="amp">&amp;</span> <span data-bind="partner2"></span></p>
     <p class="eyebrow" data-bind="dateText"></p>
     <p class="hashtag" data-bind="hashtag"></p>
-    <p class="muted small">Made with love · See you there</p>
+    <p class="muted small">Made with love · See you in the clouds</p>
   </footer>
 
   <!-- Lightbox -->

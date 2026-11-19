@@ -217,13 +217,12 @@ const WEDDING = {
     }
   });
 
-  /* ---------- Falling petals ---------- */
+  /* ---------- Falling feathers & sparkles ---------- */
   function startPetals() {
     if (reduceMotion || startPetals.started) return;
     startPetals.started = true;
     const c = $("#petals");
     const ctx = c.getContext("2d");
-    const colors = ["#E8C9BC", "#D8B4A6", "#EFE3D1", "#C9D3BC"];
     let W, H, dpr;
     const resize = () => {
       dpr = Math.min(devicePixelRatio || 1, 2);
@@ -234,63 +233,102 @@ const WEDDING = {
     };
     resize();
     addEventListener("resize", resize);
-    const count = innerWidth < 600 ? 14 : 26;
-    const make = (initial) => ({
+
+    const small = innerWidth < 600;
+    const makeFeather = (initial) => ({
       x: Math.random() * W,
-      y: initial ? Math.random() * H : -20 * dpr,
-      r: (5 + Math.random() * 7) * dpr,
-      vy: (0.35 + Math.random() * 0.6) * dpr,
+      y: initial ? Math.random() * H : -40 * dpr,
+      len: (16 + Math.random() * 16) * dpr,
+      vy: (0.25 + Math.random() * 0.45) * dpr,
       sway: Math.random() * Math.PI * 2,
-      swaySpeed: 0.008 + Math.random() * 0.012,
-      rot: Math.random() * Math.PI,
-      vr: (Math.random() - 0.5) * 0.02,
-      flip: Math.random() * Math.PI,
-      color: colors[(Math.random() * colors.length) | 0],
-      alpha: 0.45 + Math.random() * 0.4,
+      swaySpeed: 0.006 + Math.random() * 0.01,
+      swayAmp: (0.6 + Math.random() * 0.9) * dpr,
+      tilt: (Math.random() - 0.5) * 0.8,
+      alpha: 0.55 + Math.random() * 0.4,
     });
-    const petals = Array.from({ length: count }, () => make(true));
+    const makeSpark = () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      r: (0.8 + Math.random() * 1.6) * dpr,
+      t: Math.random() * Math.PI * 2,
+      speed: 0.02 + Math.random() * 0.03,
+    });
+    const feathers = Array.from({ length: small ? 9 : 16 }, () => makeFeather(true));
+    const sparks = Array.from({ length: small ? 14 : 28 }, makeSpark);
+
+    const drawFeather = f => {
+      const L = f.len, w = L * 0.28;
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.tilt + Math.sin(f.sway) * 0.45);
+      ctx.globalAlpha = f.alpha;
+      // vane
+      const g = ctx.createLinearGradient(0, -L / 2, 0, L / 2);
+      g.addColorStop(0, "rgba(255,255,255,.95)");
+      g.addColorStop(1, "rgba(214,232,248,.85)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.moveTo(0, -L / 2);
+      ctx.bezierCurveTo(w, -L / 3, w * 0.9, L / 4, 0, L / 2.4);
+      ctx.bezierCurveTo(-w * 0.8, L / 4, -w, -L / 3, 0, -L / 2);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(127,168,209,.35)";
+      ctx.lineWidth = 0.6 * dpr;
+      ctx.stroke();
+      // quill
+      ctx.strokeStyle = "rgba(91,130,173,.55)";
+      ctx.lineWidth = 0.8 * dpr;
+      ctx.beginPath();
+      ctx.moveTo(0, -L / 2.2);
+      ctx.quadraticCurveTo(w * 0.15, 0, 0, L / 2);
+      ctx.stroke();
+      ctx.restore();
+    };
+
     let visible = true;
     document.addEventListener("visibilitychange", () => (visible = !document.hidden));
     const draw = () => {
       if (visible) {
         ctx.clearRect(0, 0, W, H);
-        for (const p of petals) {
-          p.sway += p.swaySpeed;
-          p.flip += 0.03;
-          p.x += Math.sin(p.sway) * 0.6 * dpr;
-          p.y += p.vy;
-          p.rot += p.vr;
-          if (p.y > H + 20 * dpr) Object.assign(p, make(false));
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rot);
-          ctx.scale(1, Math.abs(Math.cos(p.flip)) * 0.6 + 0.4);
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = p.color;
+        for (const s of sparks) {
+          s.t += s.speed;
+          const a = (Math.sin(s.t) + 1) / 2;
+          ctx.globalAlpha = a * 0.8;
+          ctx.fillStyle = "#FFFFFF";
+          ctx.shadowColor = "rgba(191,220,242,.9)";
+          ctx.shadowBlur = 8 * dpr;
           ctx.beginPath();
-          ctx.moveTo(0, -p.r);
-          ctx.bezierCurveTo(p.r, -p.r * 0.6, p.r * 0.7, p.r * 0.7, 0, p.r);
-          ctx.bezierCurveTo(-p.r * 0.7, p.r * 0.7, -p.r, -p.r * 0.6, 0, -p.r);
+          ctx.arc(s.x, s.y, s.r * (0.6 + a * 0.6), 0, Math.PI * 2);
           ctx.fill();
-          ctx.restore();
         }
+        ctx.shadowBlur = 0;
+        for (const f of feathers) {
+          f.sway += f.swaySpeed;
+          f.x += Math.sin(f.sway) * f.swayAmp;
+          f.y += f.vy * (1 + Math.cos(f.sway) * 0.35);
+          if (f.y > H + 40 * dpr) Object.assign(f, makeFeather(false));
+          drawFeather(f);
+        }
+        ctx.globalAlpha = 1;
       }
       requestAnimationFrame(draw);
     };
     draw();
   }
 
-  /* ---------- Subtle hero parallax ---------- */
+  /* ---------- Sky parallax ---------- */
   if (!reduceMotion) {
-    const branches = $$(".branch");
+    const far = $(".hero .clouds-layer.far");
+    const mid = $(".hero .clouds-layer.mid");
+    const floor = $(".hero .clouds-layer.floor");
     const heroInner = $(".hero-inner");
     addEventListener("scroll", () => {
       const y = scrollY;
       if (y > innerHeight) return;
-      branches[0].style.translate = `0 ${y * 0.25}px`;
-      branches[1].style.translate = `0 ${y * -0.15}px`;
-      heroInner.style.translate = `0 ${y * 0.3}px`;
-      heroInner.style.opacity = 1 - y / (innerHeight * 0.9);
+      far.style.translate = `0 ${y * 0.15}px`;
+      mid.style.translate = `0 ${y * 0.3}px`;
+      floor.style.translate = `0 ${y * -0.12}px`;
+      heroInner.style.translate = `0 ${y * 0.35}px`;
+      heroInner.style.opacity = 1 - y / (innerHeight * 0.85);
     }, { passive: true });
   }
 
