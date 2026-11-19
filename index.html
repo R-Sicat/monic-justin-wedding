@@ -13,48 +13,19 @@
 </head>
 <body class="locked">
 
-  <!-- Reusable cloud shape -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <linearGradient id="cloudShade" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#FFFFFF"/>
-        <stop offset=".65" stop-color="#FBFCFF"/>
-        <stop offset="1" stop-color="#DCE7F4"/>
-      </linearGradient>
-      <symbol id="cloud" viewBox="0 0 300 130">
-        <g fill="url(#cloudShade)">
-          <circle cx="72" cy="84" r="40"/>
-          <circle cx="122" cy="58" r="52"/>
-          <circle cx="186" cy="62" r="46"/>
-          <circle cx="236" cy="88" r="34"/>
-          <rect x="36" y="84" width="236" height="44" rx="22"/>
-        </g>
-      </symbol>
-      <symbol id="cloud2" viewBox="0 0 300 130">
-        <g fill="url(#cloudShade)">
-          <circle cx="60" cy="92" r="30"/>
-          <circle cx="104" cy="70" r="42"/>
-          <circle cx="160" cy="48" r="46"/>
-          <circle cx="214" cy="72" r="40"/>
-          <circle cx="252" cy="96" r="26"/>
-          <rect x="34" y="92" width="244" height="36" rx="18"/>
-        </g>
-      </symbol>
-    </defs>
-  </svg>
 
   <!-- ============ ENVELOPE INTRO ============ -->
   <div id="intro" class="intro" aria-modal="true" role="dialog" aria-label="Invitation">
     <div class="intro-sky"></div>
     <div class="intro-clouds left">
-      <svg class="cloud " style="--x:-10%;--y:8%;--w:520px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-      <svg class="cloud " style="--x:-18%;--y:42%;--w:640px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
-      <svg class="cloud " style="--x:-6%;--y:74%;--w:560px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
+      <img class="cloud" style="--x:-10%;--y:8%;--w:520px" src="images/cloud-1.svg" alt="">
+      <img class="cloud flip" style="--x:-18%;--y:42%;--w:640px" src="images/cloud-3.svg" alt="">
+      <img class="cloud" style="--x:-6%;--y:74%;--w:560px" src="images/cloud-2.svg" alt="">
     </div>
     <div class="intro-clouds right">
-      <svg class="cloud " style="--x:62%;--y:2%;--w:560px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
-      <svg class="cloud " style="--x:58%;--y:36%;--w:620px" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-      <svg class="cloud " style="--x:64%;--y:70%;--w:600px" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+      <img class="cloud flip" style="--x:62%;--y:2%;--w:560px" src="images/cloud-2.svg" alt="">
+      <img class="cloud" style="--x:58%;--y:36%;--w:620px" src="images/cloud-1.svg" alt="">
+      <img class="cloud flip" style="--x:64%;--y:70%;--w:600px" src="images/cloud-3.svg" alt="">
     </div>
     <div class="envelope" id="envelope">
       <div class="env-back"></div>
@@ -95,19 +66,19 @@
       <div class="sky-glow" aria-hidden="true"></div>
       <div class="sky-rays" aria-hidden="true"></div>
       <div class="clouds-layer far" aria-hidden="true">
-        <svg class="cloud drift" style="--x:4%;--y:14%;--w:220px;--dur:46s;--o:.7" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
-        <svg class="cloud drift" style="--x:70%;--y:9%;--w:260px;--dur:58s;--o:.75" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud drift" style="--x:38%;--y:4%;--w:170px;--dur:40s;--o:.6" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <img class="cloud drift" style="--x:4%;--y:14%;--w:220px;--dur:46s;--o:.7" src="images/cloud-wisp.svg" alt="">
+        <img class="cloud drift flip" style="--x:70%;--y:9%;--w:260px;--dur:58s;--o:.75" src="images/cloud-2.svg" alt="">
+        <img class="cloud drift" style="--x:38%;--y:4%;--w:170px;--dur:40s;--o:.6" src="images/cloud-wisp.svg" alt="">
       </div>
       <div class="clouds-layer mid" aria-hidden="true">
-        <svg class="cloud drift" style="--x:-6%;--y:40%;--w:340px;--dur:52s;--o:.9" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud drift" style="--x:76%;--y:34%;--w:360px;--dur:64s;--o:.9" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <img class="cloud drift" style="--x:-6%;--y:40%;--w:340px;--dur:52s;--o:.9" src="images/cloud-1.svg" alt="">
+        <img class="cloud drift flip" style="--x:76%;--y:34%;--w:360px;--dur:64s;--o:.9" src="images/cloud-2.svg" alt="">
       </div>
       <div class="clouds-layer floor" aria-hidden="true">
-        <svg class="cloud bob" style="--x:-12%;--y:72%;--w:560px;--dur:9s" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud bob" style="--x:22%;--y:80%;--w:620px;--dur:11s" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
-        <svg class="cloud bob" style="--x:58%;--y:76%;--w:580px;--dur:10s" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud bob" style="--x:84%;--y:70%;--w:480px;--dur:12s" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <img class="cloud bob" style="--x:-12%;--y:72%;--w:560px;--dur:9s" src="images/cloud-3.svg" alt="">
+        <img class="cloud bob flip" style="--x:22%;--y:80%;--w:620px;--dur:11s" src="images/cloud-1.svg" alt="">
+        <img class="cloud bob" style="--x:58%;--y:76%;--w:580px;--dur:10s" src="images/cloud-3.svg" alt="">
+        <img class="cloud bob flip" style="--x:84%;--y:70%;--w:480px;--dur:12s" src="images/cloud-2.svg" alt="">
       </div>
 
       <div class="hero-inner">
@@ -347,10 +318,10 @@
     <!-- ============ RSVP ============ -->
     <section id="rsvp" class="section rsvp">
       <div class="clouds-layer rsvp-clouds" aria-hidden="true">
-        <svg class="cloud drift" style="--x:-8%;--y:8%;--w:360px;--dur:50s;--o:.9" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud drift" style="--x:74%;--y:18%;--w:320px;--dur:60s;--o:.85" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
-        <svg class="cloud drift" style="--x:-4%;--y:70%;--w:300px;--dur:56s;--o:.8" viewBox="0 0 300 130"><use href="#cloud"/></svg>
-        <svg class="cloud drift" style="--x:78%;--y:72%;--w:380px;--dur:48s;--o:.9" viewBox="0 0 300 130"><use href="#cloud2"/></svg>
+        <img class="cloud drift" style="--x:-8%;--y:8%;--w:360px;--dur:50s;--o:.9" src="images/cloud-1.svg" alt="">
+        <img class="cloud drift flip" style="--x:74%;--y:18%;--w:320px;--dur:60s;--o:.85" src="images/cloud-3.svg" alt="">
+        <img class="cloud drift" style="--x:-4%;--y:70%;--w:300px;--dur:56s;--o:.8" src="images/cloud-2.svg" alt="">
+        <img class="cloud drift flip" style="--x:78%;--y:72%;--w:380px;--dur:48s;--o:.9" src="images/cloud-1.svg" alt="">
       </div>
       <div class="rsvp-card reveal">
         <div class="section-head">

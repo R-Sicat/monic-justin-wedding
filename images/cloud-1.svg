@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340">
+  <defs>
+    <linearGradient id="body" gradientUnits="userSpaceOnUse" x1="0" y1="40" x2="0" y2="312">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".45" stop-color="#FBFDFF"/>
+      <stop offset=".75" stop-color="#E4EDF6"/>
+      <stop offset="1" stop-color="#C2D3E6"/>
+    </linearGradient>
+    <filter id="billow" x="-25%" y="-30%" width="150%" height="160%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="4" seed="3" result="n1"/>
+      <feDisplacementMap in="SourceGraphic" in2="n1" scale="90" xChannelSelector="R" yChannelSelector="G" result="d1"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="10" result="n2"/>
+      <feDisplacementMap in="d1" in2="n2" scale="26" xChannelSelector="G" yChannelSelector="R" result="d2"/>
+      <feGaussianBlur in="d2" stdDeviation="2.4"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-40%" width="160%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="6" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="50" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="10"/>
+    </filter>
+  </defs>
+  <g filter="url(#billow)" fill="url(#body)">
+    <ellipse cx="300" cy="230" rx="230" ry="62"/><ellipse cx="200" cy="190" rx="105" ry="82"/><ellipse cx="320" cy="150" rx="125" ry="110"/><ellipse cx="430" cy="195" rx="95" ry="70"/><ellipse cx="140" cy="230" rx="80" ry="45"/><ellipse cx="470" cy="235" rx="95" ry="45"/><ellipse cx="255" cy="120" rx="70" ry="60"/>
+  </g>
+  <g filter="url(#soft)" fill="#B7C9DE" opacity=".38">
+    <ellipse cx="250" cy="240" rx="70" ry="26"/><ellipse cx="380" cy="240" rx="80" ry="24"/><ellipse cx="300" cy="262" rx="180" ry="16"/>
+  </g>
+  <g filter="url(#soft)" fill="#FFFFFF" opacity=".75">
+    <ellipse cx="300" cy="105" rx="80" ry="40"/><ellipse cx="205" cy="150" rx="55" ry="30"/>
+  </g>
+</svg>
